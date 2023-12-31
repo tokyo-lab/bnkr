@@ -15,7 +15,20 @@ class Customer(Person):
         print(f"Account: {self.account_number} \n")
         print(f"Balance: {self.balance} \n")
 
+    def deposit(self):
+        try:
+            deposit_amount = float(input("Enter an amount to deposit: "))
+            self.balance += deposit_amount
+            print(f"The new balance is ${self.balance:.2f}")
+        except ValueError:
+            print("Invalid input. Please enter a numeric value")
 
-customer_1 = Customer("mike", "cooper", "54324324", 800.80)
+    def withdraw(self):
+
+
+
+customer_1 = Customer("mike", "cooper", "54324324", 800)
 
 customer_1.print_info()
+
+customer_1.deposit()
