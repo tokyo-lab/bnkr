@@ -77,9 +77,7 @@ def return_begining():
 # print(menu)
 
 finish_program = False
-print("finish_program ->", finish_program)
 customer_1 = Customer("mike", "cooper", "54324324", 800)
-print(customer_1)
 while not finish_program:
     menu = start()
     if menu == 1:
@@ -94,3 +92,4 @@ while not finish_program:
     elif menu == 4:
         print("menu item 4 selected")
         finish_program = True
+        return_begining()
