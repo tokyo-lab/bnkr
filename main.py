@@ -13,83 +13,54 @@ class Person:
 
 
 class Customer(Person):
-    def __init__(self, firstname, lastname, account_number, balance):
+    def __init__(self, firstname, lastname, account_number, balance=0):
         super().__init__(firstname, lastname)
         self.account_number = account_number
         self.balance = balance
 
-    def print_info(self):
-        print(f"Cutomer Name: {self.firstname} {self.lastname} \n")
-        print(f"Account: {self.account_number} \n")
-        print(f"Balance: ${self.balance:.2f} \n")
+    def __str__(self):
+        return f"Client: {self.firstname} {self.lastname}\nAccount Balance: {self.account_number}: ${self.balance}"
 
-    def deposit(self):
-        try:
-            deposit_amount = float(input("Enter an amount to deposit: "))
-            self.balance += deposit_amount
-            print(f"The new balance is ${self.balance:.2f}")
-        except ValueError:
-            print("Invalid input. Please enter a numeric value")
+    def deposit(self, amount_deposit):
+        self.balance += amount_deposit
+        print("Deposit accepted")
 
-    def withdraw(self):
-        try:
-            withdraw_amount = float(input("Enter an amount to withdraw: "))
-            if withdraw_amount <= self.balance:
-                self.balance -= withdraw_amount
-                print(f"The new balance is ${self.balance:.2f}")
-            else:
-                print(f"Insufficient funds. Your balance is ${self.balance:.2f}.")
-        except ValueError:
-            print("Invalid input. Please enter a numeric value")
+    def withdraw(self, amount_withdraw):
+        if self.balance >= amount_withdraw:
+            self.balance -= amount_withdraw
+            print("Withdraw done")
+        else:
+            print("Insufficient funds")
+
+
+def create_client():
+    first_name_ct = input("Enter your first name: ")
+    last_name_ct = input("Enter your last name: ")
+    account_number = input("Enter your account number: ")
+    client1 = Customer(first_name_ct, last_name_ct, account_number)
+
+    return client1
 
 
 def start():
-    # clear_screen()
-    print("*" * 50)
-    print("*" * 5 + " Welcome to bnkr " + "*" * 5)
-    print("*" * 50)
-    print("\n")
+    my_customer = create_client()
+    print(my_customer)
+    option = 0
 
-    menu_choice = "x"
-    while not menu_choice.isnumeric() or int(menu_choice) not in range(1, 5):
-        print("Choose an option: ")
-        print(
-            """
-[1] - View My Info
-[2] - Deposit Money
-[3] - Withdraw Money
-[4] - End Program
-              """
-        )
-        menu_choice = input()
+    while option != "E":
+        print("Choose: Deposit (D), Withdraw (W), or Exit (E)")
+        option = input()
 
-    return int(menu_choice)
+        if option == "D":
+            dep_amount = int(input("Deposit amount: "))
+            my_customer.deposit(dep_amount)
+        elif option == "W":
+            with_amount = int(input("Withdraw amount: "))
+            my_customer.withdraw(with_amount)
+
+        print(my_customer)
+
+    print("Thank you for using Python Bank")
 
 
-def return_begining():
-    return_choice = "x"
-
-    while return_choice.lower() != "b":
-        return_choice = input("\nPress 'b' to return home")
-
-
-# menu = start()
-# print(menu)
-
-finish_program = False
-customer_1 = Customer("mike", "cooper", "54324324", 800)
-while not finish_program:
-    menu = start()
-    if menu == 1:
-        print("menu item 1 selected")
-        customer_1.print_info()
-    elif menu == 2:
-        print("menu item 2 selected")
-        customer_1.deposit()
-    elif menu == 3:
-        print("menu item 3 selected")
-        customer_1.withdraw()
-    elif menu == 4:
-        print("menu item 4 selected")
-        finish_program = True
-        return_begining()
+start()
