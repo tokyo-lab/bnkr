@@ -13,7 +13,7 @@ class Customer(Person):
     def print_info(self):
         print(f"Cutomer Name: {self.firstname} {self.lastname} \n")
         print(f"Account: {self.account_number} \n")
-        print(f"Balance: {self.balance} \n")
+        print(f"Balance: ${self.balance:.2f} \n")
 
     def deposit(self):
         try:
@@ -24,7 +24,15 @@ class Customer(Person):
             print("Invalid input. Please enter a numeric value")
 
     def withdraw(self):
-
+        try:
+            withdraw_amount = float(input("Enter an amount to withdraw: "))
+            if withdraw_amount <= self.balance:
+                self.balance -= withdraw_amount
+                print(f"The new balance is ${self.balance:.2f}")
+            else:
+                print(f"Insufficient funds. Your balance is ${self.balance:.2f}.")
+        except ValueError:
+            print("Invalid input. Please enter a numeric value")
 
 
 customer_1 = Customer("mike", "cooper", "54324324", 800)
@@ -32,3 +40,5 @@ customer_1 = Customer("mike", "cooper", "54324324", 800)
 customer_1.print_info()
 
 customer_1.deposit()
+
+customer_1.withdraw()
