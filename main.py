@@ -44,14 +44,14 @@ class Customer(Person):
 
 
 def start():
-    clear_screen()
+    # clear_screen()
     print("*" * 50)
     print("*" * 5 + " Welcome to bnkr " + "*" * 5)
     print("*" * 50)
     print("\n")
 
     menu_choice = "x"
-    while not menu_choice.isnumeric() or int(menu_choice) not in range(1, 7):
+    while not menu_choice.isnumeric() or int(menu_choice) not in range(1, 5):
         print("Choose an option: ")
         print(
             """
@@ -73,15 +73,24 @@ def return_begining():
         return_choice = input("\nPress 'b' to return home")
 
 
+# menu = start()
+# print(menu)
+
 finish_program = False
+print("finish_program ->", finish_program)
 customer_1 = Customer("mike", "cooper", "54324324", 800)
+print(customer_1)
 while not finish_program:
     menu = start()
     if menu == 1:
+        print("menu item 1 selected")
         customer_1.print_info()
     elif menu == 2:
+        print("menu item 2 selected")
         customer_1.deposit()
     elif menu == 3:
+        print("menu item 3 selected")
         customer_1.withdraw()
     elif menu == 4:
+        print("menu item 4 selected")
         finish_program = True
